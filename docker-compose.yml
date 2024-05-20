@@ -1,0 +1,6 @@
+services:
+  python-app:
+    image: proyecto-final-mod4
+    container_name: proyecto-final-mod4
+    ports:
+      - 8082:5000
