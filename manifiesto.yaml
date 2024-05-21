@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: python-app
-          image: renatoapaza/python-app:3.udi
+          image: jpedraz/proyecto-final-mod4:v1
           imagePullPolicy: Always
           ports:
             - containerPort: 5000

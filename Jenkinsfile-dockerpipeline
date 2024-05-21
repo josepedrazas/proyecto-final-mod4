@@ -1,15 +1,15 @@
  pipeline {   
     agent any
     environment {
-        DOCKERHUB_CREDENTIALS= credentials('dockerhub')
+        DOCKERHUB_CREDENTIALS= credentials('jenkins-proyecto-final')
         registry = "jpedraz/proyecto-final-mod4"
-        registryCredential = 'dockerhub'
+        registryCredential = 'jenkins-proyecto-final'
         dockerImage = ''
     }
     stages {
        stage('Copy git repo') {
             steps {
-                git branch: 'master', credentialsId: 'github', url: 'https://github.com/josepedrazas/proyecto-final-mod4.git'
+                git branch: 'main', url: 'https://github.com/josepedrazas/proyecto-final-mod4.git'
             }
         }
 

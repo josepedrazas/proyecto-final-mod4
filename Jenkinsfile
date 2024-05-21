@@ -2,15 +2,15 @@ pipeline{
     agent any
 
     environment {
-        IMAGE_NAME = "renatoapaza/python-app"
-        DOCKERHUB_CREDS = credentials("jenkins-udi")
-        NameContainer = "python-app"
+        IMAGE_NAME = "jpedraz/proyecto-final-mod4"
+        DOCKERHUB_CREDS = credentials("jenkins-proyecto-final")
+        NameContainer = "proyecto-final-mod4"
     }
 
     stages{
         stage('Build image') {
             steps {
-                sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ./python-app'
+                sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ./proyecto-final-mod4'
             }
         }
         
@@ -48,8 +48,8 @@ pipeline{
                     // Construir el nombre de la imagen con el número de build
                     def newImage = "${IMAGE_NAME}:${BUILD_NUMBER}"
                     // Usar sed para actualizar el archivo de manifiesto
-                    sh "sed -i 's|IMAGE_PLACEHOLDER|${newImage}|' python-app/k8s/manifest.yaml"
-                    sh "cat python-app/k8s/manifest.yaml "
+                    sh "sed -i 's|IMAGE_PLACEHOLDER|${newImage}|' proyecto-final-mod4/k8s/manifest.yaml"
+                    sh "cat proyecto-final-mod4/k8s/manifest.yaml "
                 }
             }
         }
@@ -59,7 +59,7 @@ pipeline{
                  //input message: 'Continue?'
                  script {
                      withCredentials([file(credentialsId: 'minikube_config', variable: 'KUBECONFIG')]) {
-                         sh 'kubectl apply -f python-app/k8s/manifest.yaml'
+                         sh 'kubectl apply -f proyecto-final-mod4/k8s/manifest.yaml'
                      }
                  }
              }
