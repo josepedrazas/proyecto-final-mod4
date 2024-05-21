@@ -23,7 +23,7 @@ pipeline{
         stage("Docker push"){
             steps{
                 //sh 'echo ${DOCKERHUB_CREDS_PSW}'
-                sh 'echo ${DOCKERHUB_CREDS_PSW} | docker login -u ${DOCKERHUB_CREDS_USR} --password-stdin' 
+                sh 'echo ${DOCKERHUB_CREDS_USR} | docker login -u ${DOCKERHUB_CREDS_USR} --password-stdin' 
                 sh 'docker push ${IMAGE_NAME}:build-${BUILD_NUMBER}'
             }
         }
