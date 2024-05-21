@@ -16,7 +16,7 @@ pipeline{
         
         stage('Run Unit Test') {
             steps {
-                sh 'cd python-app && pip install -r requirements.txt && python3 -m unittest test_app.py'
+                sh 'cd proyecto-final-mod4 && pip install -r requirements.txt && python3 -m unittest test_app.py'
             }
         }
         
