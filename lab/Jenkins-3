@@ -13,5 +13,17 @@ pipeline {
                 sh 'cat README.md'
             }
         }
+
+        stage('Stage-GIT_COMMIT') {
+            steps {
+                 echo "${GIT_COMMIT}"
+            }
+        }
+
+        stage('Stage-BUILD_NUMBER') {
+            steps {
+                echo "${BUILD_NUMBER}"
+            }
+        }
     }
 }
