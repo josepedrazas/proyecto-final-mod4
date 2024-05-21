@@ -3,7 +3,7 @@ pipeline{
 
     environment {
         IMAGE_NAME = "jpedraz/proyecto-final-mod4"
-        DOCKERHUB_CREDS = credentials("jenkins-proyecto-final")
+        DOCKERHUB_CREDS_USR = credentials("jenkins-proyecto-final")
         NameContainer = "proyecto-final-mod4"
     }
 
@@ -24,7 +24,7 @@ pipeline{
             steps{
                 //sh 'echo ${DOCKERHUB_CREDS_PSW}'
                 sh 'echo ${DOCKERHUB_CREDS_PSW} | docker login -u ${DOCKERHUB_CREDS_USR} --password-stdin' 
-                sh 'docker push ${IMAGE_NAME}:v${BUILD_NUMBER}'
+                sh 'docker push ${IMAGE_NAME}:build-${BUILD_NUMBER}'
             }
         }
 
@@ -42,28 +42,28 @@ pipeline{
         }
         */
         
-        stage("Update Deployment Manifest") {
-            steps {
-                script {
-                    // Construir el nombre de la imagen con el número de build
-                    def newImage = "${IMAGE_NAME}:${BUILD_NUMBER}"
-                    // Usar sed para actualizar el archivo de manifiesto
-                    sh "sed -i 's|IMAGE_PLACEHOLDER|${newImage}|' proyecto-final-mod4/k8s/manifest.yaml"
-                    sh "cat proyecto-final-mod4/k8s/manifest.yaml "
-                }
-            }
-        }
+        // stage("Update Deployment Manifest") {
+        //     steps {
+        //         script {
+        //             // Construir el nombre de la imagen con el número de build
+        //             def newImage = "${IMAGE_NAME}:${BUILD_NUMBER}"
+        //             // Usar sed para actualizar el archivo de manifiesto
+        //             sh "sed -i 's|IMAGE_PLACEHOLDER|${newImage}|' proyecto-final-mod4/k8s/manifest.yaml"
+        //             sh "cat proyecto-final-mod4/k8s/manifest.yaml "
+        //         }
+        //     }
+        // }
 
-        stage("Deploy in Kubernetes") {
-             steps {
-                 //input message: 'Continue?'
-                 script {
-                     withCredentials([file(credentialsId: 'minikube_config', variable: 'KUBECONFIG')]) {
-                         sh 'kubectl apply -f proyecto-final-mod4/k8s/manifest.yaml'
-                     }
-                 }
-             }
-        }
+        // stage("Deploy in Kubernetes") {
+        //      steps {
+        //          //input message: 'Continue?'
+        //          script {
+        //              withCredentials([file(credentialsId: 'minikube_config', variable: 'KUBECONFIG')]) {
+        //                  sh 'kubectl apply -f proyecto-final-mod4/k8s/manifest.yaml'
+        //              }
+        //          }
+        //      }
+        // }
     
     }
     

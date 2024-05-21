@@ -3,7 +3,7 @@ pipeline{
 
     environment {
         IMAGE_NAME = "jpedraz/proyecto-final-mod4"
-        DOCKERHUB_CREDS = credentials("jenkins-proyecto-final")
+        DOCKERHUB_CREDS_USR = credentials("jenkins-proyecto-final")
         NameContainer = "proyecto-final-mod4"
     }
 
