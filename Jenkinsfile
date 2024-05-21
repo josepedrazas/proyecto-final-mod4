@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage('Build image') {
             steps {
-                sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ./proyecto-final-mod4'
+                sh 'docker build -t ${IMAGE_NAME}:v${BUILD_NUMBER} ./proyecto-final-mod4'
             }
         }
         
@@ -24,7 +24,7 @@ pipeline{
             steps{
                 //sh 'echo ${DOCKERHUB_CREDS_PSW}'
                 sh 'echo ${DOCKERHUB_CREDS_PSW} | docker login -u ${DOCKERHUB_CREDS_USR} --password-stdin' 
-                sh 'docker push ${IMAGE_NAME}:${BUILD_NUMBER}'
+                sh 'docker push ${IMAGE_NAME}:v${BUILD_NUMBER}'
             }
         }
 
