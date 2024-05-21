@@ -10,7 +10,7 @@ pipeline{
     stages{
         stage('Build image') {
             steps {
-                sh 'docker build -t ${IMAGE_NAME}:v${BUILD_NUMBER} ./proyecto-final-mod4'
+                sh 'docker build -t ${IMAGE_NAME}:v${BUILD_NUMBER}'
             }
         }
         
