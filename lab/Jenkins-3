@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Copy git repo') {
+            steps {
+                sh "ls -lsa"
+            }
+        }
+        stage('Display readme') {
+            steps {
+                //echo "fin"
+                sh 'cat README.md'
+            }
+        }
+
+        stage('Stage-GIT_COMMIT') {
+            steps {
+                 echo "${GIT_COMMIT}"
+            }
+        }
+
+        stage('Stage-BUILD_NUMBER') {
+            steps {
+                echo "${BUILD_NUMBER}"
+            }
+        }
+    }
+}

@@ -2,22 +2,22 @@ pipeline{
     agent any
 
     environment {
-        IMAGE_NAME = "renatoapaza/python-app"
+        IMAGE_NAME = "jpedraz/proyecto-final-mod4"
         DOCKERHUB_CREDS = credentials("dockerhub")
-        NameContainer = "python-app"
+        NameContainer = "proyecto-final-mod4"
     }
 
     stages{
 
         stage('Copy git repo') {
             steps {
-                git branch: 'master', credentialsId: 'github', url: 'https://github.com/renatoapaza/mod04-devops.git'
+                git branch: 'master', credentialsId: 'github', url: 'https://github.com/josepedrazas/proyecto-final-mod4.git'
             }
         }
 
         stage('Build image') {
             steps {
-                sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ./python-app'
+                sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} ./proyecto-final-mod4'
             }
         }
         stage("Docker push"){
